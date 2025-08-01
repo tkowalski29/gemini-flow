@@ -2,19 +2,32 @@
 
 # Required parameters:
 # @raycast.schemaVersion 1
-# @raycast.title test
+# @raycast.title Test
 # @raycast.mode compact
 
 # Optional parameters:
 # @raycast.icon 📁
-# @raycast.argument1 { "type": "text", "placeholder": "Identyfikator folderu taska" }
+# @raycast.argument1 { "type": "text", "placeholder": "Folder ID" }
+# @raycast.argument2 { "type": "dropdown", "placeholder": "Open file" }
+# @raycast.argument2.dropdown.option "Yes"
+# @raycast.argument2.dropdown.option "No"
 
 # Documentation:
-# @raycast.description Komenda testowa
+# @raycast.description Test command
 
-DIR="/Users/tkowalski/Documents/scripts"
-OUTPUT_FILE="$DIR/test.md"
+# Load common configuration
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$DIR/config/gemini/common.sh"
 
-echo "Hello World! Parametr1: $1" > "$OUTPUT_FILE"
+TASK_ID="$1"
+OPEN_FILE="$2"
+TASK_DIR=$(setup_task_environment "$TASK_ID" "test")
+TASK_FILE="$TASK_DIR/task.md"
+INSTRUCTIONS_FILE="$DIR/commands/test.md"
+OUTPUT_FILE="$TASK_DIR/test.md"
 
-echo "Odpowiedź zapisana w $OUTPUT_FILE"
+# Generate prompt
+PROMPT=$(generate_prompt "$INSTRUCTIONS_FILE" "$TASK_FILE")
+
+# Process response
+process_response "$PROMPT" "$OUTPUT_FILE" "$OPEN_FILE"

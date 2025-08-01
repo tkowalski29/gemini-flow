@@ -1,4 +1,11 @@
 .history
 .DS_Store
+
+commands/*
+!commands/.gitkeep
+
+config/**/* */
+!config/gemini/.gitkeep
+
 spec/*
 !spec/.gitkeep
