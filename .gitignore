@@ -4,7 +4,7 @@
 commands/*
 !commands/.gitkeep
 
-config/**/* */
+config/**/*
 !config/gemini/.gitkeep
 
 spec/*
