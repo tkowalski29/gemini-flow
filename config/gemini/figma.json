@@ -1,0 +1,11 @@
+{
+    "mcpServers": {
+      "figma-devmode": {
+            "type": "sse",
+            "url": "http://127.0.0.1:3845/sse"
+        }
+    },
+    "theme": "Default",
+    "selectedAuthType": "oauth-personal"
+}
+  
